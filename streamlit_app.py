@@ -1,11 +1,6 @@
-# Import python packages.
 import streamlit as st # sirve para el select box d abajo 
-from snowflake.snowpark.functions import col    
-
 import requests  
-smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-# st.text(smoothiefroot_response.json())
-sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
+from snowflake.snowpark.functions import col    
 
 # Write directly to the app.
 st.title(f":cup_with_straw: Customize Your Smoothie! :cup_with_straw:")
@@ -39,6 +34,8 @@ if ingredients_list: # si no es nulo hace lo d adentro
 
     for fruit_chosen in ingredients_list:
         ingredients_string += fruit_chosen + ' '
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+        sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
     #st.write(ingredients_string)
 
